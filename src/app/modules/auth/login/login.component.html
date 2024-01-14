@@ -1,0 +1,37 @@
+<div class="d-flex p-5">
+  <div class="w-50 d-flex justify-content-center align-items-center">
+    @if (loginForm) {
+      <div class="w-50 text-center" role="form" [formGroup]="loginForm">
+        <p>Inicio de Sesión</p>
+        <app-custom-input
+          title="Usuario"
+          type="text"
+          placeholder="Ej: juanperez"
+          [isRequired]="true"
+          formControlName="username"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['username'].errors) && f['username'].errors['required']) {
+            <span class="text-warning text-sm-start">El usuario es requerido</span>
+          }
+        </app-custom-input>
+        <app-custom-input
+          title="Contraseña"
+          type="password"
+          [isRequired]="true"
+          formControlName="password"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['password'].errors) && f['password'].errors['required']) {
+            <span class="text-warning text-sm-start">La contraseña es requerida</span>
+          }
+        </app-custom-input>
+        <button class="btn btn-success" (click)="onLogin()">Iniciar Sesión</button>
+      </div>
+    }
+  </div>
+  <div class="w-50 p-5 border-start">
+    <img src="/assets/auth/login.jpg" class="img-fluid rounded">
+    <p class="mt-2">Si aún no tienes cuenta <a routerLink="/auth/register" class="text-info cursor-pointer">registrate aquí</a></p>
+  </div>
+</div>

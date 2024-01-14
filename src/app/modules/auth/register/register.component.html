@@ -1,0 +1,51 @@
+<div class="d-flex p-5">
+  <div class="w-50 d-flex justify-content-center align-items-center">
+    @if (registerForm) {
+      <div class="w-50 text-center" role="form" [formGroup]="registerForm">
+        <p>Ingresa tús datos para registrarte</p>
+        <app-custom-input
+          title="Usuario"
+          type="text"
+          placeholder="Ej: juanperez"
+          [isRequired]="true"
+          formControlName="username"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['username'].errors) && f['username'].errors['required']) {
+            <span class="text-warning text-sm-start">El usuario es requerido</span>
+          }
+        </app-custom-input>
+        <app-custom-input
+          title="Contraseña"
+          type="password"
+          [isRequired]="true"
+          formControlName="password"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['password'].errors) && f['password'].errors['required']) {
+            <span class="text-warning text-sm-start">La contraseña es requerida</span>
+          }
+        </app-custom-input>
+        <app-custom-input
+          title="Repetir contraseña"
+          type="password"
+          [isRequired]="true"
+          formControlName="confirmPassword"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['confirmPassword'].errors) && f['confirmPassword'].errors['required']) {
+            <span class="text-warning text-sm-start">Confirma tu contraseña</span>
+          }
+          @if (registerForm.hasError('passwordMismatch')) {
+            <span class="text-warning text-sm-start d-block">Las contraseñas no coinciden</span>
+          }
+        </app-custom-input>
+        <button class="btn btn-success" (click)="onRegister()">Registrarme</button>
+      </div>
+    }
+  </div>
+  <div class="w-50 p-5 border-start">
+    <img src="/assets/auth/register.jpg" class="img-fluid rounded">
+    <p class="mt-2">Si ya tiene una cuenta <a routerLink="/auth/login" class="text-info cursor-pointer">inicia sesión aquí</a></p>
+  </div>
+</div>

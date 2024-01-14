@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h1>{{ title }}</h1>
+    <button class="btn btn-primary" (click)="onAddItem()">Agregar</button>
+  </div>
+
+  <p-table
+    #dtData
+    [value]="data"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [globalFilterFields]="['name', 'category', 'quantity']"
+  >
+    <ng-template pTemplate="caption">
+      <div class="d-flex justify-content-between align-items-center">
+        <button class="btn-secondary" (click)="clear(dtData)">Limpiar</button>
+        <input pInputText #textInput type="text" (input)="dtData.filterGlobal(textInput.value, 'contains')" placeholder="Search keyword" />
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            @for (column of columns; track column) {
+              <th>{{ column.header }}</th>
+            }
+            <th class="text-center"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr>
+          @for (column of columns; track column) {
+            <td>{{ data[column.field] }}</td>
+          }
+          <app-validate-role role="admin">
+            <td class="text-center">
+              <span class="pi pi-pencil text-primary me-2" (click)="onEditItem(data)"></span>
+            </td>
+          </app-validate-role>
+        </tr>
+    </ng-template>
+</p-table>
+</div>

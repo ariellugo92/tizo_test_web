@@ -1,0 +1,115 @@
+<app-scaffold-form-crud
+  title="Formulario de Productos"
+  (cancelData)="cancelData()"
+  (manageData)="manageData()"
+  [labelManage]="isEdit ? 'Actualizar' : 'Guardar'"
+  [deleteVisible]="isEdit"
+  [isActive]="isActive"
+  (deleteData)="deleteData()"
+>
+  @if (productForm) {
+    <div role="form" [formGroup]="productForm">
+      <app-custom-input
+        type="text"
+        title="Código"
+        placeholder="Ej: C0001"
+        [isRequired]="true"
+        formControlName="code"
+        [hasValidation]="true"
+      >
+        @if ((submitted && f['code'].errors) && f['code'].errors['required']) {
+          <span class="text-warning text-sm-start">El código es requerido</span>
+        }
+      </app-custom-input>
+      <app-custom-input
+        type="text"
+        title="Nombre"
+        placeholder="Ej: Arroz"
+        [isRequired]="true"
+        formControlName="name"
+        [hasValidation]="true"
+      >
+        @if ((submitted && f['name'].errors) && f['name'].errors['required']) {
+          <span class="text-warning text-sm-start">El nombre es requerido</span>
+        }
+      </app-custom-input>
+      <app-custom-input
+        type="textarea"
+        title="Descripción"
+        placeholder="Ej: El mejor producto para complementar el almuerzo..."
+        formControlName="description"
+      ></app-custom-input>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">
+              Categoría
+              <span class="text-danger">(*)</span>
+            </label>
+            <div>
+              <p-dropdown
+                [options]="categories"
+                optionLabel="name"
+                placeholder="Seleccione una Categoría"
+                styleClass="w-100"
+                formControlName="category"
+              ></p-dropdown>
+            </div>
+            <div>
+              @if ((submitted && f['category'].errors) && f['category'].errors['required']) {
+                <span class="text-warning text-sm-start">La categoría es requerida</span>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">
+              Unidad de medida
+              <span class="text-danger">(*)</span>
+            </label>
+            <div>
+              <p-dropdown
+                [options]="unitMeasurements"
+                placeholder="Seleccione una unidad de medida"
+                styleClass="w-100"
+                formControlName="unitMeasurement"
+              ></p-dropdown>
+            </div>
+            <div>
+              @if ((submitted && f['unitMeasurement'].errors) && f['unitMeasurement'].errors['required']) {
+                <span class="text-warning text-sm-start">La unidad de medida es requerida</span>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <app-custom-input
+            type="number"
+            title="Cantidad minima"
+            placeholder="Ej: 10"
+            formControlName="minQuantity"
+          ></app-custom-input>
+        </div>
+        <div class="col">
+          <app-custom-input
+            type="number"
+            title="Cantidad actual"
+            placeholder="Ej: 10"
+            formControlName="quantity"
+          ></app-custom-input>
+        </div>
+        <div class="col">
+          <app-custom-input
+            type="number"
+            title="Precio"
+            placeholder="Ej: 10"
+            formControlName="price"
+          ></app-custom-input>
+        </div>
+      </div>
+    </div>
+  }
+</app-scaffold-form-crud>

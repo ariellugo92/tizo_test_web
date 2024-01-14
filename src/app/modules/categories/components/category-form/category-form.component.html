@@ -1,0 +1,32 @@
+<app-scaffold-form-crud
+  title="Formulario de Categorías"
+  (cancelData)="cancelData()"
+  (manageData)="manageData()"
+  [labelManage]="isEdit ? 'Actualizar' : 'Guardar'"
+  [deleteVisible]="isEdit"
+  [isActive]="isActive"
+  (deleteData)="deleteData()"
+>
+  @if (categoryForm) {
+    <div role="form" [formGroup]="categoryForm">
+      <app-custom-input
+        type="text"
+        title="Nombre"
+        placeholder="Ej: Comidas"
+        [isRequired]="true"
+        formControlName="name"
+        [hasValidation]="true"
+      >
+        @if ((submitted && f['name'].errors) && f['name'].errors['required']) {
+          <span class="text-warning text-sm-start">El nombre es requerido</span>
+        }
+      </app-custom-input>
+      <app-custom-input
+        type="textarea"
+        title="Descripción"
+        placeholder="Ej: Aquí solo productos de comida"
+        formControlName="description"
+      ></app-custom-input>
+    </div>
+  }
+</app-scaffold-form-crud>

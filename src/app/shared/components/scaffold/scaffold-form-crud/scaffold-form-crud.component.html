@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      {{ title }}
+    </div>
+    <div class="card-body">
+      @if (!isActive) {
+        <p class="text-danger">Registro eliminado</p>
+      }
+      <ng-content></ng-content>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex justify-content-end my-1">
+        <button class="btn btn-secondary me-2" (click)="onCancelData()">Cancelar</button>
+        <app-validate-role role="admin">
+          @if (deleteVisible && isActive) {
+            <button class="btn btn-danger me-2" (click)="onDeleteData()">Eliminar</button>
+          }
+        </app-validate-role>
+        <button class="btn btn-success" (click)="onManageData()">{{ labelManage }}</button>
+      </div>
+    </div>
+  </div>
+</div>

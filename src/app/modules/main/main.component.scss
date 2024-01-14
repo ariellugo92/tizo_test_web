@@ -1,0 +1,29 @@
+.company-name {
+  padding: 16px;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.menu {
+  padding: 5px;
+
+  .menu-item {
+    padding: 16px;
+    text-align: center;
+    background-color: #279AF1;
+    border-radius: 5px;
+    margin: 5px;
+    color: white;
+  }
+
+  .menu-item:hover {
+    opacity: 0.6;
+    font-weight: bold;
+  }
+
+  .active {
+    background-color: #06D6A0;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,26 @@
+<div class="d-flex">
+  <div class="w-25 px-1">
+    <div class="company-name">
+      Tizo Test
+    </div>
+    <div class="menu">
+      <div class="menu-item" routerLink="dashboard" routerLinkActive="active">Dashboard</div>
+      <app-validate-role role="admin">
+        <div class="menu-item" routerLink="users" routerLinkActive="active">Usuarios</div>
+      </app-validate-role>
+      <div class="menu-item" routerLink="categories" routerLinkActive="active">Categorías</div>
+      <div class="menu-item" routerLink="products" routerLinkActive="active">Productos</div>
+    </div>
+    <hr>
+    <div class="text-center">
+      <p class="mb-2">{{ userLogged?.username }} - {{ userLogged?.role }}</p>
+      <div class="text-warning cursor-pointer" (click)="logout()">
+        <span class="pi pi-power-off me-2"></span>
+        Cerrar Sesión
+      </div>
+    </div>
+  </div>
+  <div class="w-75 p-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>

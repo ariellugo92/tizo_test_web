@@ -1,0 +1,67 @@
+<app-scaffold-form-crud
+  title="Formulario de Usuarios"
+  [labelManage]="isEdit ? 'Actualizar' : 'Guardar'"
+  [deleteVisible]="isEdit"
+  [isActive]="isActive"
+  (manageData)="manageData()"
+  (cancelData)="cancelData()"
+  (deleteData)="deleteData()"
+>
+
+  @if (userForm) {
+    <div role="form" [formGroup]="userForm">
+      <app-custom-input
+        title="Usuario"
+        type="text"
+        placeholder="Ej: juanperez"
+        [isRequired]="true"
+        formControlName="username"
+        [hasValidation]="true"
+      >
+        @if ((submitted && f['username'].errors) && f['username'].errors['required']) {
+          <span class="text-warning text-sm-start">El usuario es requerido</span>
+        }
+      </app-custom-input>
+      <div class="mb-3">
+        <label class="form-label">Rol</label>
+        <div>
+          <p-dropdown
+            [options]="roles"
+            optionLabel="label"
+            optionValue="value"
+            formControlName="role"
+            placeholder="Seleccione un rol"
+            styleClass="w-100"
+          ></p-dropdown>
+        </div>
+      </div>
+      @if (!isEdit) {
+        <app-custom-input
+          title="Contraseña"
+          type="password"
+          [isRequired]="true"
+          formControlName="password"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['password'].errors) && f['password'].errors['required']) {
+            <span class="text-warning text-sm-start">La contraseña es requerida</span>
+          }
+        </app-custom-input>
+        <app-custom-input
+          title="Repetir contraseña"
+          type="password"
+          [isRequired]="true"
+          formControlName="confirmPassword"
+          [hasValidation]="true"
+        >
+          @if ((submitted && f['confirmPassword'].errors) && f['confirmPassword'].errors['required']) {
+            <span class="text-warning text-sm-start">Confirma tu contraseña</span>
+          } @if (userForm.hasError('passwordMismatch')) {
+            <span class="text-warning text-sm-start d-block">Las contraseñas no coinciden</span>
+          }
+        </app-custom-input>
+      }
+    </div>
+  }
+
+</app-scaffold-form-crud>
